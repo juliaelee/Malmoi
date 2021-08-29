@@ -11,7 +11,9 @@ def lststr(lst):
 # 이 .py 파일을 실행하면 실행될 main method이다.
 def main():
     # 혐오 표현을 "게시물 검색"으로 서치하면 나오는 결과 페이지 링크이다.
-    link = "https://search.dcinside.com/post/q/.ED.96.89.EB.B3.B5"
+    link = input("DCINSIDE 혐오표현 검색 페이지 링크: ")
+    # link = "https://search.dcinside.com/post/q/.ED.96.89.EB.B3.B5"
+
     #그 페이지의 html을 text로 가져온다.
     html_text = requests.get(link).text
 
