@@ -15,14 +15,14 @@ def main():
     # link = "https://search.dcinside.com/post/q/.ED.96.89.EB.B3.B5"
 
     #그 페이지의 html을 text로 가져온다.
-    html_text = requests.get(link).text
+    html_text = get(link).text
 
     # 그 html 내용을 좀 더 다루기 쉽게 BeautifulSoup로 만든다.
     soup = BeautifulSoup(html_text, 'lxml')
     # 원하는 url들이 있는 class를 찾는다.
     sch_list= soup.find_all('a', class_= 'tit_txt')
     # 그 안에서 링크만 쏙 빼오고 싶기 때문에 regular expression(정규 표현)을 사용한다.
-    r = re.compile('href="(.*?)"')
+    r = compile('href="(.*?)"')
     # for loop을 위해 비워둔 리스트
     url_list = []
 
