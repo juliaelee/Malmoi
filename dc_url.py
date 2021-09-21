@@ -1,7 +1,7 @@
 # 내가 필요한 함수와 라이브러리를 import한다.
 from bs4 import BeautifulSoup
 from requests import get
-from re import compile, findall
+from re import compile, findall, sub
 
 # Just a function that turns lists into strings because the re.findall() really annoys me
 def lststr(lst):
@@ -36,9 +36,21 @@ def main():
         #비워둔 리스트에 추가해준다.
         url_list.append(url_str)
 
-    # 제대로 모든 게 됐는 지 확인하는 for loop.
+    #다른 사이트에서도 이런 문제가 발생하는 지는 모르겠지만, "&"가 "&amp;"로 바뀌어 가져와지는 현상이 일어났다.
+    #그것도 고쳐주자. 안 그러면 링크가 먹통이다.
+    new_list = []
+    #링크에서 에러나는 부분들을 고쳐준다.
     for url in url_list:
+        new_list.append(sub('&amp;', "&", url))
+
+    # 제대로 모든 게 됐는 지 확인하는 for loop.
+    for url in new_list:
         print(url)
+
+    #url들을 txt파일에 저장한다.
+    with open("url_list.txt", "w") as f:
+        for url in new_list:
+            f.write(url + "\n")
 #이 파링을 실행하면 main method를 실행하도록 한다.
 if __name__ == "__main__":
     main()
